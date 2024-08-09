@@ -45,7 +45,7 @@ export const getFlightById = async (req, res) => {
 // Get all flights
 export const getAllFlights = async (req, res) => {
   try {
-    const flights = await Flight.find().populate('user', 'name email');
+    const flights = await Flight.find()
     res.status(200).json(flights);
   } catch (error) {
     res.status(500).json({ message: error.message });
