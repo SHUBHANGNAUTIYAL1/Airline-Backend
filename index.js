@@ -3,6 +3,7 @@ import dotenv from"dotenv"
 import mongoose from "mongoose"
 import authRoute from "./routes/auth.js"
 import FlightRoute from "./routes/Flight.js"
+import BookingRoute from "./routes/Booking.js"
 
 import cors from 'cors';
 
@@ -27,6 +28,7 @@ const connect=async()=>{
     app.use(express.json())
     app.use("/api/auth",authRoute);
     app.use("/api/flight",FlightRoute);
+    app.use("/api/booking",BookingRoute);
 
 
 app.listen(8100,()=>{
