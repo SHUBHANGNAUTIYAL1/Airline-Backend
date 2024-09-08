@@ -4,8 +4,11 @@ import mongoose from "mongoose"
 import authRoute from "./routes/auth.js"
 import FlightRoute from "./routes/Flight.js"
 import BookingRoute from "./routes/Booking.js"
+import Stripe from "stripe"
+import Payment from "./routes/payment.js"
 
 import cors from 'cors';
+
 
 const app=express()
 dotenv.config()
@@ -29,6 +32,7 @@ const connect=async()=>{
     app.use("/api/auth",authRoute);
     app.use("/api/flight",FlightRoute);
     app.use("/api/booking",BookingRoute);
+    app.use("/api/payment",Payment)
 
 
 app.listen(8100,()=>{
