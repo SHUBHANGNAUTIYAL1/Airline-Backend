@@ -25,8 +25,8 @@ export const payment=async (req, res) => {
         },
       ],
       mode: 'payment',
-      success_url: 'http://localhost:3000/success', // Adjust the success URL as per your app
-      cancel_url: 'http://localhost:3000/cancel', // Adjust the cancel URL as per your app
+      success_url: 'http://localhost:5173/booking', // Adjust the success URL as per your app
+      cancel_url: 'http://localhost:5173/home', // Adjust the cancel URL as per your app
     });
    
     res.json({ sessionId: session.id });
