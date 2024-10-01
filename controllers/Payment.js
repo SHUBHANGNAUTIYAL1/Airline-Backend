@@ -14,7 +14,7 @@ export const payment=async (req, res) => {
       line_items: [
         {
           price_data: {
-            currency: 'inr',
+            currency: 'nzd',
             product_data: {
               name: 'Flight Reservation',
               description: `Flight ID: ${flightId}`,

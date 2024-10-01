@@ -2,9 +2,28 @@ import Booking from "../models/Booking.js";
 
 // Create a new booking
 export const createBooking = async (req, res) => {
-    console.log("aya hoon bhai")
+  console.log("oye")
   try {
-    const { flightId, bookingDate, bookingTravellers, price, category, user } = req.body;
+    
+    const { flightId, bookingDate, bookingTravellers, travellerDetails, user } = req.body;
+
+    // Validate travellerDetails array
+    if (!travellerDetails || travellerDetails.length !== bookingTravellers) {
+      return res.status(400).json({ message: "The number of travellers and traveller details don't match." });
+    }
+
+    // Calculate total price based on traveller details (this is an example; you can apply discounts as per category)
+    let totalPrice = 0;
+    travellerDetails.forEach(traveller => {
+      let basePrice = 100; // Example base price
+      if (traveller.category === "Senior Citizen") {
+        totalPrice += basePrice * 0.8; // 20% discount for Senior Citizens
+      } else if (traveller.category === "Student") {
+        totalPrice += basePrice * 0.9; // 10% discount for Students
+      } else {
+        totalPrice += basePrice; // No discount for others
+      }
+    });
 
     const newBooking = new Booking({
       flight: flightId,
@@ -16,27 +35,26 @@ export const createBooking = async (req, res) => {
       time: req.body.time,
       bookingDate,
       bookingTravellers,
-      price,
-      category,
+      travellerDetails, // Pass traveller details here
+      totalPrice, // Calculated total price
     });
-
+    console.log(newBooking)
     const booking = await newBooking.save();
     res.status(201).json(booking);
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
     res.status(500).json({ message: error.message });
   }
 };
 export const deleteAllBookings = async (req, res) => {
   try {
-    const result = await Booking.deleteMany({}); // This deletes all documents in the Booking collection
+    const result = await Booking.deleteMany({});
     res.status(200).json({ message: 'All bookings deleted successfully', deletedCount: result.deletedCount });
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: error.message });
   }
 };
-
 // Get all bookings by user ID
 export const getBookingsByUserId = async (req, res) => {
   try {
