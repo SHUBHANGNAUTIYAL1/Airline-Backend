@@ -5,7 +5,7 @@ export const createBooking = async (req, res) => {
   console.log("oye")
   try {
     
-    const { flightId, bookingDate, bookingTravellers, travellerDetails, user } = req.body;
+    const { flightId, bookingDate, bookingTravellers, travellerDetails,totalPrice, user } = req.body;
 
     // Validate travellerDetails array
     if (!travellerDetails || travellerDetails.length !== bookingTravellers) {
@@ -13,17 +13,7 @@ export const createBooking = async (req, res) => {
     }
 
     // Calculate total price based on traveller details (this is an example; you can apply discounts as per category)
-    let totalPrice = 0;
-    travellerDetails.forEach(traveller => {
-      let basePrice = 100; // Example base price
-      if (traveller.category === "Senior Citizen") {
-        totalPrice += basePrice * 0.8; // 20% discount for Senior Citizens
-      } else if (traveller.category === "Student") {
-        totalPrice += basePrice * 0.9; // 10% discount for Students
-      } else {
-        totalPrice += basePrice; // No discount for others
-      }
-    });
+    
 
     const newBooking = new Booking({
       flight: flightId,
@@ -36,7 +26,7 @@ export const createBooking = async (req, res) => {
       bookingDate,
       bookingTravellers,
       travellerDetails, // Pass traveller details here
-      totalPrice, // Calculated total price
+      totalPrice:totalPrice, // Calculated total price
     });
     console.log(newBooking)
     const booking = await newBooking.save();
