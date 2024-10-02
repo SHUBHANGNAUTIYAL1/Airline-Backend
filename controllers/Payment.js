@@ -25,8 +25,8 @@ export const payment=async (req, res) => {
         },
       ],
       mode: 'payment',
-      success_url: 'https://airline-frontend-xi.vercel.app/booking', // Adjust the success URL as per your app
-      cancel_url: 'https://airline-frontend-xi.vercel.app/home', // Adjust the cancel URL as per your app
+      success_url: 'http://localhost:5173/booking', // Adjust the success URL as per your app
+      cancel_url: 'http://localhost:5173/home', // Adjust the cancel URL as per your app
     });
    
     res.json({ sessionId: session.id });
