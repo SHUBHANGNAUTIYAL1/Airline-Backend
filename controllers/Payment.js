@@ -19,14 +19,14 @@ export const payment=async (req, res) => {
               name: 'Flight Reservation',
               description: `Flight ID: ${flightId}`,
             },
-            unit_amount: price * 100, // Stripe expects the price in the smallest currency unit (paise for INR)
+            unit_amount: price * 100, 
           },
           quantity: 1,
         },
       ],
       mode: 'payment',
-      success_url: 'https://airline-frontend-xi.vercel.app/booking', // Adjust the success URL as per your app
-      cancel_url: 'http://localhost:5173/home', // Adjust the cancel URL as per your app
+      success_url: 'https://airline-frontend-xi.vercel.app/booking', 
+      cancel_url: 'https://airline-frontend-xi.vercel.app/home', 
     });
    
     res.json({ sessionId: session.id });
